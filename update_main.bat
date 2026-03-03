@@ -15,14 +15,12 @@ REM 1. Check and install Git
 REM ==========================================
 set "GIT_EXE="
 
-REM Check local git first
 if exist ".\git\cmd\git.exe" (
     set "GIT_EXE=.\git\cmd\git.exe"
     echo [Git] Using local Git
     goto :git_found
 )
 
-REM Check git in PATH
 for /f "delims=" %%i in ('where git 2^>nul') do (
     if not defined GIT_EXE (
         set "GIT_EXE=%%i"
@@ -31,7 +29,6 @@ for /f "delims=" %%i in ('where git 2^>nul') do (
     )
 )
 
-REM Download portable Git
 echo [Git] Git not found. Downloading portable MinGit...
 
 set "GIT_URL=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/MinGit-2.44.0-64-bit.zip"
@@ -56,7 +53,7 @@ echo [Git] Portable Git installed
 echo.
 
 REM ==========================================
-REM 2. Clone repository to temp folder
+REM 2. Clone repository
 REM ==========================================
 echo [Clone] Cloning repository to temp folder...
 echo         URL: https://github.com/p-fpv/videodownload-ytdlp-gui.git
@@ -75,7 +72,7 @@ echo [Clone] Done.
 echo.
 
 REM ==========================================
-REM 3. Copy all files from repository
+REM 3. Copy files (excluding update_main.bat)
 REM ==========================================
 echo [Update] Copying all files from repository...
 
@@ -85,14 +82,36 @@ if not exist "%TEMP_CLONE%" (
     exit /b 1
 )
 
-xcopy /E /Y /I "%TEMP_CLONE%\*.*" "%ROOT%\" >nul
+REM Copy all files except update_main.bat
+for /f "delims=" %%f in ('dir /b "%TEMP_CLONE%"') do (
+    if not "%%f"=="update_main.bat" (
+        if exist "%TEMP_CLONE%\%%f\" (
+            xcopy /E /Y /I "%TEMP_CLONE%\%%f\*.*" "%ROOT%\%%f\" >nul
+        ) else (
+            copy /Y "%TEMP_CLONE%\%%f" "%ROOT%\%%f" >nul
+        )
+    )
+)
+
+REM Copy update_main.bat last (may fail if running, but that's ok)
+copy /Y "%TEMP_CLONE%\update_main.bat" "%ROOT%\update_main.bat" >nul 2>&1
 echo   + All files updated from repository
 
+REM ==========================================
+REM 4. Cleanup temp files
+REM ==========================================
 echo [Clean] Removing temp clone folder...
-rmdir /s /q "%TEMP_CLONE%"
+rmdir /s /q "%TEMP_CLONE%" 2>nul
+del "%ROOT%\git-temp.zip" 2>nul
+del "%ROOT%\python-temp.zip" 2>nul
+del "%ROOT%\ffmpeg-temp.zip" 2>nul
+rmdir /s /q "%ROOT%\ffmpeg-temp" 2>nul
 echo [Clean] Done.
 echo.
 
+REM ==========================================
+REM 5. Run dependency update
+REM ==========================================
 echo ==========================================
 echo   Running dependency update...
 echo ==========================================
