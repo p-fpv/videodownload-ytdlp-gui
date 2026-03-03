@@ -102,10 +102,4 @@ echo.
 call "%ROOT%\other\install_or_update_requirements.bat"
 
 echo.
-echo ==========================================
-echo   Update Complete!
-echo ==========================================
-echo.
-echo Run START.bat to launch the application.
-echo.
 pause
