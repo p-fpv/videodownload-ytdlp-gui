@@ -1,5 +1,4 @@
 @echo off
-chcp 65001 >nul
 setlocal EnableDelayedExpansion
 cd /d "%~dp0"
 
@@ -86,7 +85,7 @@ if not exist "%TEMP_CLONE%" (
     exit /b 1
 )
 
-xcopy /E /Y /I /H "%TEMP_CLONE%\*.*" "%ROOT%\" >nul
+xcopy /E /Y /I "%TEMP_CLONE%\*.*" "%ROOT%\" >nul
 echo   + All files updated from repository
 
 echo [Clean] Removing temp clone folder...
