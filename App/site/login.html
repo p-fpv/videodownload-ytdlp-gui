@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>site</title>
+    <link rel="stylesheet" href="/site/style.css">
+    <style>
+        /* Стили, отключающие прокрутку только для этой страницы */
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden; 
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0; /* Переопределяем margin: 20px из style.css */
+        }
+
+        .login-card { 
+            width: 300px; 
+            text-align: center; 
+        }
+
+        .login-input { 
+            width: 100%; 
+            margin-bottom: 10px; 
+            box-sizing: border-box;
+        }
+
+        .error-msg { 
+            color: red; 
+            margin-bottom: 10px; 
+            font-size: 14px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container login-card">
+        <h2>site</h2>
+        <h3>Вход</h3>
+        
+        {% if error %}
+        <div class="error-msg">Неверный логин или пароль</div>
+        {% endif %}
+
+        <form method="post">
+            <input type="text" name="username" class="login-input" placeholder="Логин" required autocomplete="username">
+            <input type="password" name="password" class="login-input" placeholder="Пароль" required autocomplete="current-password">
+            <button type="submit" class="download-btn">Войти</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+# Portable Python installation
+App/python/
+
+# FFmpeg binary
+App/ffmpeg.exe
+
+# Portable Git (скачивается update_main.bat)
+git/
+
+# User downloads (очищается при запуске)
+App/downloads/
+
+# Log files
+App/server.log
+
+# Pip installer
+App/get-pip.py
+
+# Temporary files
+*.zip
+python-temp.zip
+ffmpeg-temp.zip
+ffmpeg-temp*/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+Desktop.ini

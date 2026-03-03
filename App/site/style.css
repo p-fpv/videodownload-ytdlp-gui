@@ -1,0 +1,49 @@
+body { font-family: sans-serif; margin: 20px; background-color: #f4f4f9; }
+.container { max-width: 900px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+h2 { margin-top: 0; color: #333; }
+
+/* Стили полей и кнопок */
+/* ИСПРАВЛЕНИЕ: Добавлен input[type="password"] */
+input[type="text"], input[type="password"] { 
+    width: 60%; 
+    padding: 10px; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    box-sizing: border-box; /* Чтобы padding не ломал ширину */
+}
+
+button { padding: 10px 20px; background: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+button:hover { background: #0056b3; }
+button:disabled { background: #ccc; cursor: not-allowed; }
+
+.download-btn { background: #28a745; width: 100%; font-size: 16px; padding: 12px; }
+.download-btn:hover { background: #218838; }
+
+.stop-btn { background: #dc3545; width: 100%; font-size: 14px; padding: 10px; margin-top: 10px; display: none; }
+.stop-btn:hover { background: #c82333; }
+
+#loading { display: none; text-align: center; margin: 20px; color: #666; font-style: italic; }
+#error-msg { color: red; margin-top: 10px; background: #ffe6e6; padding: 10px; border-radius: 4px; display: none; }
+
+#input-area { display: flex; gap: 10px; margin-bottom: 20px; }
+
+/* Область выбора форматов */
+#selection-area { display: none; margin-top: 20px; }
+
+table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px; }
+th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+th { background-color: #f8f9fa; font-weight: bold; }
+tr:hover { background-color: #f1f1f1; cursor: pointer; }
+tr.selected { background-color: #e6f7ff; border-left: 5px solid #1890ff; }
+
+.section-title { font-size: 16px; margin: 15px 0 10px; font-weight: bold; color: #444; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+.format-id { font-family: monospace; background: #eee; padding: 2px 5px; border-radius: 3px; }
+.proto { font-weight: bold; font-size: 12px; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
+.proto-https { background: #d4edda; color: #155724; }
+.proto-http { background: #e2e3e5; color: #383d41; }
+.proto-m3u8 { background: #fff3cd; color: #856404; }
+
+#progress-area { display: none; margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px; }
+.progress-container { width: 100%; background-color: #e0e0e0; border-radius: 4px; overflow: hidden; height: 25px; margin-bottom: 10px; }
+.progress-bar { height: 100%; background-color: #007BFF; text-align: center; line-height: 25px; color: white; width: 0%; transition: width 0.3s; }
+.progress-info { font-size: 14px; color: #555; display: flex; justify-content: space-between; }

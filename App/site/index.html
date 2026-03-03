@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>YT-DLP Downloader</title>
+    <link rel="stylesheet" href="/site/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>YT-DLP Downloader</h2>
+        
+        <!-- Поле ввода -->
+        <div id="input-area">
+            <input type="text" id="videoUrl" placeholder="Вставьте ссылку на видео...">
+            <button onclick="fetchFormats()" id="btn-fetch">1. Получить форматы</button>
+        </div>
+
+        <div id="loading">Анализ видео... Пожалуйста, подождите.</div>
+        <div id="error-msg"></div>
+
+        <!-- Область выбора (включая галочку) -->
+        <div id="selection-area">
+            <h3 id="video-title" style="color: #333; margin-bottom: 5px;"></h3>
+            
+            <!-- Галочка теперь здесь, скрывается вместе с таблицами -->
+            <div style="margin-bottom: 15px;">
+                <input type="checkbox" id="https-only" checked onchange="applyFilter()">
+                <label for="https-only" style="cursor: pointer;">Отображать только HTTPS</label>
+            </div>
+
+            <div class="section-title">2. Выберите Видео</div>
+            <table id="video-table">
+                <thead>
+                    <tr>
+                        <th width="12%">ID</th>
+                        <th>Качество</th>
+                        <th width="15%">Протокол</th>
+                        <th width="15%">Размер</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div class="section-title">3. Выберите Аудио</div>
+            <table id="audio-table">
+                <thead>
+                    <tr>
+                        <th width="12%">ID</th>
+                        <th>Описание</th>
+                        <th width="15%">Протокол</th>
+                        <th width="15%">Размер</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div id="progress-init-area">
+                <button onclick="startDownload()" id="btn-download" class="download-btn">4. Скачать выбранное</button>
+            </div>
+        </div>
+
+        <!-- Прогресс и результат -->
+        <div id="progress-area">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar">0%</div>
+            </div>
+            <div class="progress-info">
+                <span id="progress-status">Инициализация...</span>
+                <span id="progress-speed">0 MB/s</span>
+            </div>
+            <button id="stop-download-btn" class="stop-btn" onclick="cancelCurrentDownload()">Остановить загрузку</button>
+            
+            <div id="download-actions" style="margin-top:15px; display:none;">
+                <a id="final-download-link" href="#" class="download-btn" style="display:inline-block; text-align:center; width:100%; text-decoration:none;">Скачать файл снова</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/site/script.js"></script>
+</body>
+</html>
